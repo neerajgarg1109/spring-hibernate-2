@@ -1,6 +1,6 @@
 # Database Access with Hibernate and Spring
 
-18 Mar 2009
+_18 Mar 2009_
 
 Hibernate's ability to simplify database access with Spring at the helm removes an almost unbelievable burden from enterprise development. Gone are the days of tedious SQL maintenance and overly agile trial-and-error development of homegrown data access objects. Hibernate and Spring take care of all but top-level configuration and implementation of database access. It is this level that will be demystified here, as a universally portable and minimalistic approach to database access is built on the shoulders of these giants.
 
