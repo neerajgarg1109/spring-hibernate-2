@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <bean id="hibernateDao" class="com.earldouglas.springhibernate.HibernateDao">
+        <property name="hibernateTemplate" ref="hibernateTemplate" />
+    </bean>
+
+    <bean id="hibernateTemplate" class="com.earldouglas.springhibernate.HibernateTemplate">
+        <property name="sessionFactory" ref="localSessionFactoryBean" />
+    </bean>
+
+    <bean id="localSessionFactoryBean"
+        class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean"
+        init-method="createDatabaseSchema">
+        <property name="dataSource" ref="hsqlDataSource" />
+        <property name="annotatedClasses">
+            <list>
+                <value>com.earldouglas.springhibernate.TestIdentifiable</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="hsqlDataSource" class="org.apache.commons.dbcp.BasicDataSource"
+        destroy-method="close">
+        <property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+        <property name="url" value="jdbc:hsqldb:mem:mydatabase" />
+        <property name="username" value="sa" />
+        <property name="password" value="" />
+    </bean>
+</beans>
